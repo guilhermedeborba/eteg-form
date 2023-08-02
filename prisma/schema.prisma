@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ColorTypeEnum { 
+  green
+  blue
+  red
+  orange
+  yellow
+  violet
+}
+
+model Profile { 
+  id           String        @id @default(uuid()) @db.VarChar(36)
+  fullName     String        @db.VarChar(36)
+  cpf          String        @unique
+  email        String        @unique
+  color        ColorTypeEnum
+
+  @@map("profiles")
+}
+
